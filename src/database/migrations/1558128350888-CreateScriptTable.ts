@@ -17,6 +17,7 @@ export class CreateScriptTable1558128350888 implements MigrationInterface {
                     length: '255',
                     isPrimary: false,
                     isNullable: false,
+                    isUnique: true,
                 }, {
                     name: 'script',
                     type: 'jsonb',

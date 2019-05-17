@@ -38,6 +38,7 @@ export class ScriptService {
     }
 
     public async create(uid: string, script: Script): Promise<Script> {
+        console.log(uid);
         script.id = undefined;
         script.projectId = uid;
         const newScript = await this.scriptRepository.save(script);

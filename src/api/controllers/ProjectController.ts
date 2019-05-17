@@ -1,12 +1,11 @@
 import {
-    Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put
+    Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put
 } from 'routing-controllers';
 
 import { ProjectNotFoundError } from '../errors/ProjectNotFoundError';
 import { Project } from '../models/Project';
 import { ProjectService } from '../services/ProjectService';
 
-@Authorized()
 @JsonController('/project')
 export class ProjectController {
 

@@ -11,7 +11,9 @@ export class Script {
     public id: number;
 
     @IsNotEmpty()
-    @Column()
+    @Column({
+        unique: true,
+    })
     public name: string;
 
     @IsNotEmpty()

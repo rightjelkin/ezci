@@ -1,12 +1,11 @@
 import {
-    Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, QueryParam
+    Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, QueryParam
 } from 'routing-controllers';
 
 import { ScriptOrProjectNotFoundError } from '../errors/ScriptOrProjectNotFoundError';
 import { Script } from '../models/Script';
 import { ScriptService } from '../services/ScriptService';
 
-@Authorized()
 @JsonController('/script')
 export class ScriptController {
 
