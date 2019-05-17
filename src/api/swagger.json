@@ -1,626 +1,515 @@
 {
-    "openapi": "3.0.0",
-    "servers": [],
-    "info": {
-        "title": "",
-        "description": "",
-        "version": ""
+  "openapi" : "3.0.0",
+  "servers" : [ ],
+  "info" : {
+    "description" : "Simple service for execute commands on remote host\n",
+    "version" : "1.0.0",
+    "title" : "ezci",
+    "contact" : {
+      "email" : "romgalkin23@gmail.com"
     },
-    "tags": [
-        {
-            "name": "Info"
-        },
-        {
-            "name": "User"
-        },
-        {
-            "name": "Pet"
-        }
-    ],
-    "paths": {
-        "/": {
-            "get": {
-                "tags": [
-                    "Info"
-                ],
-                "summary": "Show API information",
-                "description": "This is a public route",
-                "operationId": "showApiInfo",
-                "responses": {
-                    "200": {
-                        "description": "ok"
-                    }
-                }
-            }
-        },
-        "/users": {
-            "get": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "List all users",
-                "description": "Returns all users",
-                "operationId": "FindAllUsers",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/User"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Create new user",
-                "description": "",
-                "operationId": "CreateUser",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/User"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "requestBody": {
-                    "$ref": "#/components/requestBodies/NewUser"
-                }
-            }
-        },
-        "/users/{id}": {
-            "get": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Get user",
-                "description": "Returns the given user",
-                "operationId": "FindUser",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of user to return",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/User"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Update user",
-                "description": "Updates the given user",
-                "operationId": "UpdateUser",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of user to update",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/User"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "requestBody": {
-                    "$ref": "#/components/requestBodies/NewUser"
-                }
-            },
-            "delete": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Delete user",
-                "description": "Removes the given user",
-                "operationId": "DeleteUser",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of user to delete",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/pets": {
-            "get": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "List all pets",
-                "description": "Returns all pets",
-                "operationId": "FindAllPets",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/Pet"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "Create new pet",
-                "description": "",
-                "operationId": "CreatePet",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/Pet"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/NewPet"
-                            }
-                        }
-                    },
-                    "description": "User object that needs to be added to the database",
-                    "required": true
-                }
-            }
-        },
-        "/pets/{id}": {
-            "get": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "Get pet",
-                "description": "Returns the given pet",
-                "operationId": "FindPet",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of pet to return",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/Pet"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "Update pet",
-                "description": "Updates the given pet",
-                "operationId": "UpdatePet",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of pet to update",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/Pet"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/NewPet"
-                            }
-                        }
-                    },
-                    "description": "Pet object that needs to be added to the database",
-                    "required": true
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "Delete pet",
-                "description": "Removes the given pet",
-                "operationId": "DeletePet",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of pet to delete",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "components": {
-        "requestBodies": {
-            "NewUser": {
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "$ref": "#/components/schemas/NewUser"
-                        }
-                    }
-                },
-                "description": "User object that needs to be added to the database",
-                "required": true
-            }
-        },
-        "securitySchemes": {
-            "basicAuth": {
-                "type": "http",
-                "scheme": "basic"
-            }
-        },
-        "schemas": {
-            "NewUser": {
-                "type": "object",
-                "properties": {
-                    "firstName": {
-                        "type": "string"
-                    },
-                    "lastName": {
-                        "type": "string"
-                    },
-                    "username": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    }
-                }
-            },
-            "NewPet": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "age": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "userId": {
-                        "type": "string",
-                        "format": "uuid"
-                    }
-                }
-            },
-            "User": {
-                "title": "User",
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "format": "uuid"
-                    },
-                    "firstName": {
-                        "type": "string"
-                    },
-                    "lastName": {
-                        "type": "string"
-                    },
-                    "username": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "updatedAt": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "createdAt": {
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "Pet": {
-                "title": "Pet",
-                "allOf": [
-                    {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string",
-                                "format": "uuid"
-                            },
-                            "name": {
-                                "type": "string"
-                            },
-                            "age": {
-                                "type": "integer",
-                                "format": "int64"
-                            },
-                            "user": {
-                                "$ref": "#/components/schemas/User"
-                            },
-                            "updatedAt": {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            "createdAt": {
-                                "type": "string",
-                                "format": "date-time"
-                            }
-                        }
-                    }
-                ]
-            }
-        }
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
+  },
+  "tags" : [ {
+    "name" : "projects",
+    "description" : "Methods for managing your created projects."
+  }, {
+    "name" : "scripts",
+    "description" : "Methods for manipulating with project scripts"
+  } ],
+  "paths" : {
+    "/project" : {
+      "post" : {
+        "tags" : [ "projects" ],
+        "summary" : "Add a new project to your ci",
+        "operationId" : "addProject",
+        "responses" : {
+          "400" : {
+            "description" : "Invalid input"
+          },
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Project"
+        }
+      },
+      "get" : {
+        "tags" : [ "projects" ],
+        "summary" : "Fetch all projects",
+        "operationId" : "getProjects",
+        "responses" : {
+          "200" : {
+            "description" : "Successfull operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/project/{uid}" : {
+      "get" : {
+        "tags" : [ "projects" ],
+        "summary" : "Fetch project by its uid",
+        "operationId" : "getProject",
+        "parameters" : [ {
+          "name" : "uid",
+          "in" : "path",
+          "description" : "uid of project to update",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Invalid uid supplied"
+          },
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "projects" ],
+        "summary" : "Update an existing project",
+        "operationId" : "updateProject",
+        "parameters" : [ {
+          "name" : "uid",
+          "in" : "path",
+          "description" : "uid of project to update",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Invalid uid supplied"
+          },
+          "400" : {
+            "description" : "Invalid input"
+          },
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Project"
+        }
+      },
+      "delete" : {
+        "tags" : [ "projects" ],
+        "summary" : "Delete an existing project",
+        "operationId" : "deleteProject",
+        "parameters" : [ {
+          "name" : "uid",
+          "in" : "path",
+          "description" : "uid of project to delete",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Invalid uid supplied"
+          },
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/script" : {
+      "post" : {
+        "tags" : [ "scripts" ],
+        "summary" : "Add new script to project",
+        "operationId" : "addScript",
+        "parameters" : [ {
+          "name" : "uid",
+          "in" : "query",
+          "description" : "Project uid",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Project with supplied uid not found"
+          },
+          "400" : {
+            "description" : "Validation error"
+          },
+          "200" : {
+            "description" : "Succesful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Script"
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Script"
+        }
+      },
+      "get" : {
+        "tags" : [ "scripts" ],
+        "summary" : "Fetch all project scripts",
+        "operationId" : "getScripts",
+        "parameters" : [ {
+          "name" : "uid",
+          "in" : "query",
+          "description" : "Project uid",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Project with supplied uid not found"
+          },
+          "200" : {
+            "description" : "Succesful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Script"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/script/{name}" : {
+      "put" : {
+        "tags" : [ "scripts" ],
+        "summary" : "Update an existing script by its name",
+        "operationId" : "updateScript",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "description" : "Script name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "uid",
+          "in" : "query",
+          "description" : "Project uid",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Project with supplied uid or script with supplied name not found"
+          },
+          "400" : {
+            "description" : "Validation error"
+          },
+          "200" : {
+            "description" : "Succesful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Script"
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Script"
+        }
+      },
+      "delete" : {
+        "tags" : [ "scripts" ],
+        "summary" : "Update an existing script by its name",
+        "operationId" : "deleteScript",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "description" : "Script name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "uid",
+          "in" : "query",
+          "description" : "Project uid",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Project with supplied uid or script with supplied name not found"
+          },
+          "200" : {
+            "description" : "Succesful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Script"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get" : {
+        "tags" : [ "scripts" ],
+        "summary" : "Fetch an existing script by its name",
+        "operationId" : "getScript",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "description" : "Script name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "uid",
+          "in" : "query",
+          "description" : "Project uid",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Project with supplied uid or script with supplied name not found"
+          },
+          "400" : {
+            "description" : "Validation error"
+          },
+          "200" : {
+            "description" : "Succesful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Script"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/script/{name}/execute" : {
+      "post" : {
+        "tags" : [ "scripts" ],
+        "summary" : "Execute script on remote host",
+        "operationId" : "execute",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "description" : "Script name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "uid",
+          "in" : "query",
+          "description" : "Project uid",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Project with supplied uid or script with supplied name not found"
+          },
+          "200" : {
+            "description" : "Succesful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Execution"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Project" : {
+        "type" : "object",
+        "properties" : {
+          "uid" : {
+            "type" : "string",
+            "description" : "Unique token of project for manipulation with"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of project"
+          },
+          "cwd" : {
+            "type" : "string",
+            "description" : "Absolute project path on server"
+          },
+          "privateKey" : {
+            "type" : "string",
+            "description" : "Private key for ssh access"
+          },
+          "host" : {
+            "type" : "string",
+            "description" : "Ip address of host machine"
+          },
+          "user" : {
+            "type" : "string",
+            "description" : "System user which will execute commands"
+          }
+        }
+      },
+      "Script" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name of script"
+          },
+          "script" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "description" : "Formally lines of script to execute"
+            }
+          }
+        }
+      },
+      "Execution" : {
+        "type" : "object",
+        "properties" : {
+          "timestamp" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "outs" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "description" : "Output of script line"
+            }
+          }
+        }
+      }
+    },
+    "requestBodies" : {
+      "Project" : {
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "name" : {
+                  "type" : "string",
+                  "description" : "Name of project"
+                },
+                "cwd" : {
+                  "type" : "string",
+                  "description" : "Absolute project path on server"
+                },
+                "privateKey" : {
+                  "type" : "string",
+                  "description" : "Private key for ssh access"
+                },
+                "host" : {
+                  "type" : "string",
+                  "description" : "Ip address of host machine"
+                },
+                "user" : {
+                  "type" : "string",
+                  "description" : "System user which will execute commands"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Script" : {
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "name" : {
+                  "type" : "string",
+                  "description" : "Name of script"
+                },
+                "script" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string",
+                    "description" : "Formally lines of script to execute"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
