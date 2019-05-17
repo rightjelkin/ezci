@@ -388,6 +388,22 @@
               }
             }
           }
+        },
+        "requestBody" : {
+          "content" : {
+            "multipart/form-data" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "build" : {
+                    "type" : "string",
+                    "format" : "binary",
+                    "description" : "Optional archive with build"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
