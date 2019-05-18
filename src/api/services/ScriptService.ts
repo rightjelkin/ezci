@@ -81,6 +81,14 @@ export class ScriptService {
         }
     }
 
+    public async readExecutions(uid: string, name: string): Promise<any> {
+        const currentProject = await this.projectRepository.findOne({ uid });
+        if (!currentProject) { return undefined; }
+        const currentScript = await this.scriptRepository.findOne({ where: { projectId: currentProject.uid, name } });
+        if (!currentScript) { return undefined; }
+        return this.executionRepository.find({ where: { scriptId: currentScript.id } });
+    }
+
     public async execute(uid: string, name: string): Promise<any> {
         const currentProject = await this.projectRepository.findOne({ uid });
         if (!currentProject) { return undefined; }
@@ -106,8 +114,7 @@ export class ScriptService {
         execution.timestamp = new Date().toISOString();
         execution.outs = outsJsonb;
         execution.scriptId = currentScript.id;
-        await this.executionRepository.save(execution);
-        return outsArray;
+        return this.executionRepository.save(execution);
     }
 
 }

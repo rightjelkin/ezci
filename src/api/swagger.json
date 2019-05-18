@@ -19,6 +19,9 @@
   }, {
     "name" : "scripts",
     "description" : "Methods for manipulating with project scripts"
+  }, {
+    "name" : "executions",
+    "description" : "Methods for manipulating with script executions"
   } ],
   "paths" : {
     "/project" : {
@@ -352,6 +355,48 @@
         }
       }
     },
+    "/script/{name}/executions" : {
+      "get" : {
+        "tags" : [ "scripts" ],
+        "summary" : "Fetch an existing script by its name",
+        "operationId" : "getScriptExecutions",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "description" : "Script name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "uid",
+          "in" : "query",
+          "description" : "Project uid",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Project with supplied uid or script with supplied name not found"
+          },
+          "200" : {
+            "description" : "Succesful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Execution"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/script/{name}/execute" : {
       "post" : {
         "tags" : [ "scripts" ],
@@ -406,6 +451,37 @@
           }
         }
       }
+    },
+    "/execution/{id}" : {
+      "get" : {
+        "tags" : [ "executions" ],
+        "summary" : "Fetch an exicution of script by its id",
+        "operationId" : "getExecution",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Execution id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Execution with supplied id not found"
+          },
+          "200" : {
+            "description" : "Succesful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Execution"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -454,6 +530,9 @@
       "Execution" : {
         "type" : "object",
         "properties" : {
+          "id" : {
+            "type" : "number"
+          },
           "timestamp" : {
             "type" : "string",
             "format" : "date-time"
@@ -461,8 +540,18 @@
           "outs" : {
             "type" : "array",
             "items" : {
-              "type" : "string",
-              "description" : "Output of script line"
+              "type" : "object",
+              "properties" : {
+                "code" : {
+                  "type" : "string"
+                },
+                "stdout" : {
+                  "type" : "string"
+                },
+                "stderr" : {
+                  "type" : "string"
+                }
+              }
             }
           }
         }

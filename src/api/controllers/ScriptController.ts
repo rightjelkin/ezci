@@ -3,6 +3,7 @@ import {
 } from 'routing-controllers';
 
 import { ScriptOrProjectNotFoundError } from '../errors/ScriptOrProjectNotFoundError';
+import { Execution } from '../models/Execution';
 import { Script } from '../models/Script';
 import { ScriptService } from '../services/ScriptService';
 
@@ -41,6 +42,12 @@ export class ScriptController {
     @Delete('/:name')
     public delete(@QueryParam('uid') uid: string, @Param('name') name: string): Promise<Script> {
         return this.scriptService.delete(uid, name);
+    }
+
+    @OnUndefined(ScriptOrProjectNotFoundError)
+    @Get('/:name/executions')
+    public readExecutions(@QueryParam('uid') uid: string, @Param('name') name: string): Promise<Execution> {
+        return this.scriptService.readExecutions(uid, name);
     }
 
     @OnUndefined(ScriptOrProjectNotFoundError)
