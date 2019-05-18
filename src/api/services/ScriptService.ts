@@ -104,7 +104,7 @@ export class ScriptService {
         });
         for (const key in currentScript.script) {
             if (!currentScript.script.hasOwnProperty(key)) { continue; }
-            const result = await ssh.execCommand(currentScript.script[key]);
+            const result = await ssh.execCommand(currentScript.script[key], { cwd: currentProject.cwd });
             outsArray.push(result);
             outsJsonb[key] = result;
             if (result.stderr !== '') { break; }
