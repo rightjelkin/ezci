@@ -27,7 +27,7 @@ export class ScriptService {
     public async readAll(uid: string): Promise<Script[]> {
         const currentProject = await this.projectRepository.findOne({ uid });
         if (currentProject) {
-            return this.scriptRepository.find({ where: { projectId: uid } });
+            return this.scriptRepository.find({ where: { projectId: uid }, relations: ['executions'] });
         } else {
             return undefined;
         }
