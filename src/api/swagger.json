@@ -425,10 +425,6 @@
             "type" : "string",
             "description" : "Absolute project path on server"
           },
-          "privateKey" : {
-            "type" : "string",
-            "description" : "Private key for ssh access"
-          },
           "host" : {
             "type" : "string",
             "description" : "Ip address of host machine"
@@ -486,10 +482,6 @@
                 "cwd" : {
                   "type" : "string",
                   "description" : "Absolute project path on server"
-                },
-                "privateKey" : {
-                  "type" : "string",
-                  "description" : "Private key for ssh access"
                 },
                 "host" : {
                   "type" : "string",

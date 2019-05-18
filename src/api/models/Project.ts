@@ -19,10 +19,6 @@ export class Project {
 
     @IsNotEmpty()
     @Column()
-    public privateKey: string;
-
-    @IsNotEmpty()
-    @Column()
     public host: string;
 
     @IsNotEmpty()

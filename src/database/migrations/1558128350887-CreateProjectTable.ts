@@ -24,11 +24,6 @@ export class CreateProjectTable1558128350887 implements MigrationInterface {
                     isPrimary: false,
                     isNullable: false,
                 }, {
-                    name: 'privateKey',
-                    type: 'text',
-                    isPrimary: false,
-                    isNullable: false,
-                }, {
                     name: 'host',
                     type: 'varchar',
                     length: '20',
