@@ -17,6 +17,12 @@ export class Execution {
     @Column({ type: 'jsonb', nullable: false })
     public outs: any;
 
+    @Column({
+        name: 'script_id',
+        nullable: false,
+    })
+    public scriptId: number;
+
     @ManyToOne(type => Script, script => script.executions)
     @JoinColumn({ name: 'script_id' })
     public script: Script;

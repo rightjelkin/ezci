@@ -42,4 +42,10 @@ export class ScriptController {
     public delete(@QueryParam('uid') uid: string, @Param('name') name: string): Promise<Script> {
         return this.scriptService.delete(uid, name);
     }
+
+    @OnUndefined(ScriptOrProjectNotFoundError)
+    @Post('/:name/execute')
+    public execute(@QueryParam('uid') uid: string, @Param('name') name: string): Promise<Script> {
+        return this.scriptService.execute(uid, name);
+    }
 }

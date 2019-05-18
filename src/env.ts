@@ -73,4 +73,8 @@ export const env = {
         username: getOsEnv('MONITOR_USERNAME'),
         password: getOsEnv('MONITOR_PASSWORD'),
     },
+    keys: {
+        private:  getOsPath('PRIVATE_KEY'),
+        public: getOsPath('PRIVATE_KEY'),
+    },
 };
