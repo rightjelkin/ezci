@@ -42,6 +42,10 @@ export class ScriptService {
         }
     }
 
+    public async readById(id: number): Promise<Script | undefined> {
+        return this.scriptRepository.findOne(id);
+    }
+
     public async create(uid: string, script: Script): Promise<Script> {
         console.log(uid);
         script.id = undefined;

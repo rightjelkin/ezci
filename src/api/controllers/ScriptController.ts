@@ -27,6 +27,12 @@ export class ScriptController {
     }
 
     @OnUndefined(ScriptOrProjectNotFoundError)
+    @Get('/:id')
+    public readById(@Param('id') id: number): Promise<Script> {
+        return this.scriptService.readById(id);
+    }
+
+    @OnUndefined(ScriptOrProjectNotFoundError)
     @Get('/:name')
     public read(@QueryParam('uid') uid: string, @Param('name') name: string): Promise<Script> {
         return this.scriptService.read(uid, name);

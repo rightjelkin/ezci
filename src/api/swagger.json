@@ -233,6 +233,40 @@
         }
       }
     },
+    "/script/{id}" : {
+      "get" : {
+        "tags" : [ "scripts" ],
+        "summary" : "Fetch an existing script by its id",
+        "operationId" : "getScriptById",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Script id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Project with supplied uid or script with supplied name not found"
+          },
+          "400" : {
+            "description" : "Validation error"
+          },
+          "200" : {
+            "description" : "Succesful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Script"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/script/{name}" : {
       "put" : {
         "tags" : [ "scripts" ],
