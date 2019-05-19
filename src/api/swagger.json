@@ -233,7 +233,7 @@
         }
       }
     },
-    "/script/{id}" : {
+    "/script/byid/{id}" : {
       "get" : {
         "tags" : [ "scripts" ],
         "summary" : "Fetch an existing script by its id",
